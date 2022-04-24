@@ -20,6 +20,18 @@ fetch(BREEDS_URL)
     })
 
     select.addEventListener('change', event => {
-        let url = `https://dog.ceo/api/breed/${event.target.value}/images/random`
-        console.log(url)
+        let url = `https://dog.ceo/api/breed/${event.target.value}/images/random`;
+        getDoggoImg(url)
     })
+
+    const img = document.querySelector('.dog-img')
+
+    const getDoggoImg = url => {
+        fetch(url) // fetch from the API url above
+            .then(res => {
+                return res.json(); // get JSON message back
+            })
+            .then(data => {
+                img.src = data.message; //extract message from JSON and attach to img tag as new source
+            })
+    }
